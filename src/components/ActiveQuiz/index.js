@@ -3,16 +3,16 @@ import AnswersList from './AnswersList'
 import styles from "./active-quiz.module.scss"
 
 const ActiveQuiz = props => {
-  
+  console.log(props)
   return (
     <div className={`${styles.activeQuiz} p-3`}>
       <p className={styles.question}>
       <span>
-        <strong>1. </strong>
+        <strong>{props.answerNumber}. </strong>
        {props.question}
       </span>
 
-        <small>4 of 12</small>
+        <small>{props.answerNumber} of {props.quizLength}</small>
       </p>
 
       <AnswersList 
