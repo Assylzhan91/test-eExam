@@ -3,7 +3,7 @@ import AnswersList from './AnswersList'
 import styles from "./active-quiz.module.scss"
 
 const ActiveQuiz = props => {
-  console.log(props)
+  
   return (
     <div className={`${styles.activeQuiz} p-3`}>
       <p className={styles.question}>
@@ -18,6 +18,7 @@ const ActiveQuiz = props => {
       <AnswersList 
         answers={props.answers}
         onAnswerClickHandler={props.onAnswerClickHandler}
+        state={props.state}
       />
     </div>
 

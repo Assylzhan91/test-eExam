@@ -5,15 +5,39 @@ import styles from "./quiz.module.scss"
 class Quiz extends Component {
   state = {
     quiz: getData(),
-    activeQuestion: 0
+    activeQuestion: 0,
+    answerState: null
   }
   onAnswerClickHandler = (id)=>{
+    let question = this.state.quiz[this.state.activeQuestion]
+    if(id === question.rightAnswers ){
+      this.setState({
+        answerState: {[question.rightAnswers]: 'success'}
+      })
+      
+       let timer = window.setTimeout(()=>{
+         if(this.isFinishedQuiz()){
+           console.log('isFinishedQuiz')
+         }else{
+           this.setState({
+             activeQuestion: this.state.activeQuestion + 1,
+             answerState: null
+           })
+         }
+         window.clearTimeout(timer)
+       }, 1000)
+    }else{
+      this.setState({
+        answerState: {[id]: 'error'}
+      })
+    }
    
-   this.setState({
-     activeQuestion: this.state.activeQuestion + 1
-   })
   }
   
+  
+  isFinishedQuiz = ()=>{
+    return this.state.activeQuestion + 1 === this.state.quiz.length
+  }
   render() {
     return (
       <div className={`${styles.quiz} pt-5`}>
@@ -25,6 +49,7 @@ class Quiz extends Component {
             onAnswerClickHandler={this.onAnswerClickHandler}
             quizLength={this.state.quiz.length}
             answerNumber={this.state.activeQuestion + 1}
+            state={this.state.answerState}
           />
         </div>
       </div>
@@ -37,7 +62,8 @@ export  default Quiz
 function getData() {
  
   return [
-    { id: 1,
+    { 
+      id: 1,
       question: "1 Question 1",
       rightAnswers: 2,
       answers: [
@@ -49,7 +75,7 @@ function getData() {
     },
     
     { 
-      id: 1,
+      id: 2,
       question: "2 Question 2",
       rightAnswers: 3,
       answers: [
