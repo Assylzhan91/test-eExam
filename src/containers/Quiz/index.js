@@ -9,6 +9,12 @@ class Quiz extends Component {
     answerState: null
   }
   onAnswerClickHandler = (id)=>{
+    if(this.state.answerState){
+      const key = Object.keys(this.state.answerState)[0]
+      if(this.state.answerState[key]=== 'success'){
+        return 
+      }
+    }
     let question = this.state.quiz[this.state.activeQuestion]
     if(id === question.rightAnswers ){
       this.setState({
