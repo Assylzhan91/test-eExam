@@ -7,11 +7,14 @@ class Drawer extends Component {
 
   render() {
     let cls = [
-      styles.drawer,
-      !this.props.isOpen ? styles.close : null
-    ].join(' ')
+      styles.drawer
+    ]
+    
+    if(!this.props.isOpen){
+      cls.push(styles.close)
+    }
     return (
-      <nav className={cls}>
+      <nav className={cls.join(' ')}>
         <ul>
           {links.map((link, index)=>{
             return (
