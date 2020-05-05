@@ -1,14 +1,17 @@
 import React from 'react';
-import {render} from 'react-dom';
+import ReactDOM from 'react-dom';
+import './index.css';
 import App from './App';
-import 'normalize.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './index.css'
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import {BrowserRouter} from 'react-router-dom'
+import registerServiceWorker from './registerServiceWorker';
 
 
+const application = (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+)
 
-render(
- <App/>, 
-document.getElementById('root'));
+
+ReactDOM.render(application, document.getElementById('root'));
+registerServiceWorker();
