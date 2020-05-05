@@ -3,7 +3,7 @@ import styles from "./answersList.module.scss"
 import AnswerItem from "./AnswerItem"
 
 const AnswersList = props => {
- 
+
   return (
     <ul className={styles.answerList}>
       {props.answers.map((answer, index) =>{
@@ -13,8 +13,10 @@ const AnswersList = props => {
           onAnswerClickHandler={props.onAnswerClickHandler}
           state={props.state ? props.state[answer.id] : null}
         />
+      
       })}
     </ul>
+    
   )
 }
 

@@ -4,26 +4,42 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faTimes} from "@fortawesome/free-solid-svg-icons"
 import {faCheck} from "@fortawesome/free-solid-svg-icons"
 
-const Finished = props => {
+const Finished = ({quiz, results, onRetry}) => {
+  let successCount = Object.keys(results).reduce(((total, key)=>{
+   
+    if(results[key] === 'success'){
+      total++
+   
+    }
+    return total
+  }), 0)
+  
   return (
     <div className={styles.finished}>
       <ul>
-        <li className={styles.item}>
-          <strong>1. </strong>
-          Question
-          <FontAwesomeIcon icon={faTimes} className="success"/>
-        </li>
-        
-        <li className={styles.item}>
-          <strong>2. </strong>
-          Question
-          <FontAwesomeIcon icon={faCheck}  className="error"/>
-        </li>
+        {
+          quiz.map((quizItem, index)=>{
+            let cls = [results[quizItem.id] === 'error' ? 'error' : 'success']
+            
+            return(
+              <li key={index} className={styles.item}>
+                <strong>{index + 1 }. </strong>
+                {quizItem.question}
+                <FontAwesomeIcon 
+                  icon={results[quizItem.id] === 'error' ? faTimes : faCheck }
+                  className={cls.join('')}
+                />
+              </li>
+            ) 
+          })
+        }
       </ul>
 
-      <p>That's right answers 4 of 10</p>
+      <p>That's right answers {successCount} of {quiz.length}</p>
       <div>
-
+        <button onClick={onRetry}>
+          Try again
+        </button>
       </div>
     </div>
   )
