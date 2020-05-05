@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import ActiveQuiz from '../../components/ActiveQuiz'
+import Finished from '../../components/Finished'
 import styles from "./quiz.module.scss"
 
 class Quiz extends Component {
   state = {
     quiz: getData(),
     activeQuestion: 0,
-    answerState: null
+    answerState: null,
+    isFnished: true
   }
   onAnswerClickHandler = (id)=>{
     if(this.state.answerState){
@@ -23,7 +25,9 @@ class Quiz extends Component {
       
        let timer = window.setTimeout(()=>{
          if(this.isFinishedQuiz()){
-           console.log('isFinishedQuiz')
+           this.setState({
+             isFnished: true
+           })
          }else{
            this.setState({
              activeQuestion: this.state.activeQuestion + 1,
@@ -49,14 +53,21 @@ class Quiz extends Component {
       <div className={`${styles.quiz} pt-5`}>
         <div className={`${styles.wrapper}`}>
           <h1>Quiz</h1>
-          <ActiveQuiz
-            answers={this.state.quiz[this.state.activeQuestion].answers}
-            question={this.state.quiz[this.state.activeQuestion].question}
-            onAnswerClickHandler={this.onAnswerClickHandler}
-            quizLength={this.state.quiz.length}
-            answerNumber={this.state.activeQuestion + 1}
-            state={this.state.answerState}
-          />
+          {
+            this.state.isFnished 
+              ? <Finished
+                  
+                />
+              : <ActiveQuiz
+                  answers={this.state.quiz[this.state.activeQuestion].answers}
+                  question={this.state.quiz[this.state.activeQuestion].question}
+                  onAnswerClickHandler={this.onAnswerClickHandler}
+                  quizLength={this.state.quiz.length}
+                  answerNumber={this.state.activeQuestion + 1}
+                  state={this.state.answerState}
+                />
+              
+          }
         </div>
       </div>
     )

@@ -1,0 +1,23 @@
+.finished{
+  padding: 20px;
+  color: #fff;
+  border-radius: 5px;
+  border: 2px solid #fff;
+}
+
+.item{
+  svg{
+    margin-left: 10px;
+  }
+  :global(.success){
+      color: rgba( #b4ff7e, .8);
+  }
+  
+  :global(.error){
+      color: rgba( #ff7169, .8);
+  }
+  
+}
+  
+
+
