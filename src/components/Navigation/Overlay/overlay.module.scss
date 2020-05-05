@@ -1,0 +1,14 @@
+.overlay{
+    transition: all .3s;
+  &:after{
+    content: '';
+    display: block;
+    background-color: #1c1c1c;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    opacity: .6;
+  }
+}
