@@ -26,9 +26,9 @@ class Quiz extends Component {
   
     if(id === question.rightAnswers ){
       if(!results[question.id]){
-        console.log(!results[question.id])
         results[question.id] = success
       }
+      
       this.setState({
         answerState: {[id]: success},
         results

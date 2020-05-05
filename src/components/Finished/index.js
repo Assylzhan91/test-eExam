@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from "./finished.module.scss"
+import Button from "../UI/Button"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faTimes} from "@fortawesome/free-solid-svg-icons"
 import {faCheck} from "@fortawesome/free-solid-svg-icons"
@@ -37,9 +38,8 @@ const Finished = ({quiz, results, onRetry}) => {
 
       <p>That's right answers {successCount} of {quiz.length}</p>
       <div>
-        <button onClick={onRetry}>
-          Try again
-        </button>
+        <Button onClick={onRetry} type="primary">Try again</Button>
+        <Button onClick={onRetry} type="success">Try again</Button>
       </div>
     </div>
   )
