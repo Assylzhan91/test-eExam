@@ -22,10 +22,9 @@
 
 :global(.auth){
   background: rgb(9,135,249);
-  background: linear-gradient(180deg, rgba(9,135,249,1) 0%, rgba(19,157,223,1) 25%, rgba(21,38,216,1) 56%);
+  background: linear-gradient(180deg, rgba(#03529a,1) 0%, rgba(19,157,223,1) 25%, rgba(21,38,216,1) 56%);
 }
 :global(.quiz-creator){
   background: rgb(249,61,9);
   background: linear-gradient(306deg, rgba(249,61,9,1) 0%, rgba(223,46,19,1) 51%, rgba(216,21,182,1) 98%);
-
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import MenuToggle from '../../components/Navigation/MenuToggle'
 import Drawer from '../../components/Navigation/Drawer'
 import styles from './layout.module.scss'
-import {Route, Switch, withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class Layout extends Component {
   state = {
