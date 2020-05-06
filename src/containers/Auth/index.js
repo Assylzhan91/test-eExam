@@ -35,7 +35,8 @@ class Auth extends Component {
           minLength: 6
         }
       }
-    }
+    },
+    isValidate: false
   }
   
   validateControl(value, validation ){
@@ -65,8 +66,16 @@ class Auth extends Component {
     control.touched = true
     control.valid = this.validateControl(control.value, control.validation)
     formControls[controlName] = control
+    
+    let  isValidate = true
+    
+    Object.keys(formControls).forEach( name =>{
+      isValidate = formControls[name].valid && isValidate
+    })
+    
     this.setState({
-      formControls
+      formControls,
+      isValidate
     })
   }
   onSignInHandler=()=>{
@@ -116,10 +125,16 @@ class Auth extends Component {
           
           <Button
             onClick={this.onSignInHandler}
-          >Sign in</Button>
+            disabled={!this.state.isValidate}
+            type="success"
+          >
+            Sign in
+          </Button>
           
           <Button
             onClick={this.onLoginHandler}
+            disabled={!this.state.isValidate}
+            type="primary"
           >
             Register
           </Button>

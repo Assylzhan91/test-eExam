@@ -13,13 +13,6 @@
   &:active{
     box-shadow: inset 2px 2px 1px rgba(#000, .3);
   }
-  
-  &:disabled{
-    background-color: #ccc;
-    color: #000;
-    cursor: not-allowed;
-  }
-
 
   &:global(.error){
     background-color: #ff7169;
@@ -32,6 +25,12 @@
   &:global(.primary){
     background-color: #3a85ff;
     color: #eeeeee;
+  }
+  
+  &:disabled{
+    background-color: #ccc;
+    color: #000;
+    cursor: not-allowed;
   }
 }
 
