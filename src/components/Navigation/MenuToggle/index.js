@@ -22,10 +22,9 @@ const MenuToggle = props => {
  
 
   return (
-    <div>
+    <div  className={csl.join(' ')}>
       <FontAwesomeIcon
         icon={icon}
-        className={csl.join(' ')}
         onClick={props.onToggle}
       />
     </div>

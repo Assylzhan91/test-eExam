@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, withRouter} from 'react-router-dom'
 import Layout from './hoc/Layout/Layout'
 import Quiz from './containers/Quiz'
 import QuizList from './containers/QuizList'
@@ -19,4 +19,4 @@ const App = props => {
   )
 }
 
-export default App
+export default withRouter(App)

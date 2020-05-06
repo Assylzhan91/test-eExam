@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import styles from "./finished.module.scss"
 import Button from "../UI/Button"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
@@ -39,7 +40,11 @@ const Finished = ({quiz, results, onRetry}) => {
       <p>That's right answers {successCount} of {quiz.length}</p>
       <div>
         <Button onClick={onRetry} type="primary">Try again</Button>
-        <Button onClick={onRetry} type="success">Try again</Button>
+        
+        <Link to="/">
+          <Button onClick={onRetry} type="success">Go to ListQuiz</Button>  
+        </Link>
+        
       </div>
     </div>
   )
