@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import styles from "./"
+import { withRouter } from 'react-router-dom'
+import styles from "./auth.module.sass"
 
 class Auth extends Component {
 
@@ -7,7 +8,7 @@ class Auth extends Component {
   
     return (
       <div>
-        
+        <h1>Auth</h1>
       </div>
     )
   }

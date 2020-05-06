@@ -12,7 +12,7 @@ const MenuToggle = props => {
   ]
   
   let icon
-  if(props.isOpen){
+  if(props.isOpened){
     csl.push('open')
     icon = faTimes
   
@@ -20,7 +20,7 @@ const MenuToggle = props => {
     icon = faBars
   }
  
- 
+
   return (
     <div>
       <FontAwesomeIcon

@@ -7,33 +7,30 @@ import styles from './layout.module.scss'
 
 class Layout extends Component {
   state = {
-    isOpen: false
+    isOpened: false
   }
   onToggleMenuHandler = ()=>{
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpened: !this.state.isOpened
     })
   }
   
   render() {
+   
     return (
       <div className={styles.layout}>
-        {
-          this.state.isOpen
-          ? <Overlay onClickOverlay={this.onToggleMenuHandler}/>        
-          : null
-        }
-
+        
         <Drawer
-          isOpen={this.state.isOpen}
+          onToggleMenuHandler={this.onToggleMenuHandler}
+          isOpened={this.state.isOpened}
         />
         
         <MenuToggle 
           onToggle={this.onToggleMenuHandler}
-          isOpen={this.state.isOpen}          
+          isOpened={this.state.isOpened}          
         />
         <main className={styles.main}>
-          <Quiz/>
+         {this.props.children}
         </main>
       </div>
     )
