@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from "./quizCreator.module.sass"
+// import styles from "./quizCreator.module.sass"
 
 class QuizCreator extends Component {
 

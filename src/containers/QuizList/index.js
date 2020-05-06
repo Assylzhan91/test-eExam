@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from "./quizList.module.sass"
-import {NavLink, withRouter} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 
 class QuizList extends Component {
 
