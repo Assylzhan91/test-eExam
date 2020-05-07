@@ -9,7 +9,7 @@ class QuizList extends Component {
   componentDidMount() {
     axios.get('https://test-quiz-2bf28.firebaseio.com/quiz.json')
       .then( (resp) => {
-        console.log(resp);
+
       })
 
   }
