@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import styles from "./quizCreator.module.sass"
 import Button from "../../components/UI/Button";
-import creatControl from "../../form/formFramework";
+import {createControl, validate, validateForm} from "../../form/formFramework";
 import Input from "../../components/UI/Input";
 import Select from "../../components/UI/Select";
 
 
 function createOption(number){
-  return creatControl(
+  return createControl(
     { id: number,
       label: `Option ${number}`,
       errorMessage: 'This option mustn\'t be empty'},
@@ -18,7 +18,7 @@ function createOption(number){
 
 function creatFormControl(){
   return {
-    question: creatControl({
+    question: createControl({
       label: "Enter a new question",
       errorMessage: 'The question mustn\'t be empty'
     },{required: true}),
@@ -34,29 +34,47 @@ class QuizCreator extends Component {
   state = {
     quiz: [],
     rightAnswersId: 1,
-    formControls: creatFormControl()
+    formControls: creatFormControl(),
+    isFormValid: false
   }
   
-  SubmitHandler=(e)=>{
+  SubmitHandler = e =>{
     e.preventDefault()
   }
   
-  addQuestionHandler = () =>{
+  addQuestionHandler = e =>{
+    e.preventDefault()
     console.log('addQuestionHandler')
   }
 
-  createQuizHandler = () =>{
+  createQuizHandler = e =>{
+    e.preventDefault()
     console.log('createQuizHandler')
   }
 
-  onChangeHandler = (value, control)=>{
-      console.log(value)
+  onChangeHandler = (value, controlName)=>{
+    const formControls = { ...this.state.formControls }
+    const control = { ...formControls[controlName] }
+
+    control.touched = true
+    control.value = value
+    control.valid = validate(control.value, control.validation)
+
+    formControls[controlName] = control
+
+    this.setState({
+      formControls,
+      isFormValid: validateForm(formControls)
+    })
+
+    
   } 
   
   onChangeSelectHandler = e =>{
     this.setState({
       rightAnswersId: parseInt(e.target.value) 
     })
+    
   }
   
   renderFormControl () {
@@ -100,10 +118,16 @@ class QuizCreator extends Component {
           
           
           {select}
-          <Button type="primary" onClick={this.addQuestionHandler}>
+          <Button type="primary" 
+                  onClick={this.addQuestionHandler}
+                  disabled={!this.state.isFormValid}
+          >
             Add a question
           </Button>
-          <Button type="success" onClick={this.createQuizHandler}>
+          <Button type="success" 
+                  onClick={this.createQuizHandler}
+                  disabled={this.state.quiz.length === 0}
+          >
             Create a new test 
           </Button>
         </form>
