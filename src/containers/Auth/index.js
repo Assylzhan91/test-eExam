@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from "axios"
 import styles from "./auth.module.sass"
 import Button from "../../components/UI/Button"
 import Input from "../../components/UI/Input"
@@ -7,6 +8,7 @@ function validateEmail(email) {
   let pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
   return pattern.test(String(email).toLowerCase())  
 }
+
 
 class Auth extends Component {
   state = {
@@ -78,12 +80,41 @@ class Auth extends Component {
       isValidate
     })
   }
-  onSignInHandler=()=>{
+  
+  onSignInHandler = async ()=>{
+    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='
+    
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true
+    }
+
+    try {
+      const response = await axios.post(url + 'AIzaSyAMRSQfJKJR_pfDttEoVeZl2YtPiJnw_0o', authData)
+      console.log(response.data)
+    }catch (e) {
+      console.log(e)
+    }
+  
     
   }
 
-  onLoginHandler=()=>{
-    
+  onLoginHandler= async ()=>{
+    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true
+    }
+
+    try {
+      const response = await axios.post(url + 'AIzaSyAMRSQfJKJR_pfDttEoVeZl2YtPiJnw_0o', authData)
+      console.log(response.data)
+    }catch (e) {
+      console.log(e)
+    }
+
   }
 
   SubmitHandler=(e)=>{
@@ -124,7 +155,7 @@ class Auth extends Component {
           }
           
           <Button
-            onClick={this.onSignInHandler}
+            onClick={this.onLoginHandler}           
             disabled={!this.state.isValidate}
             type="success"
           >
@@ -132,7 +163,7 @@ class Auth extends Component {
           </Button>
           
           <Button
-            onClick={this.onLoginHandler}
+            onClick={this.onSignInHandler}
             disabled={!this.state.isValidate}
             type="primary"
           >

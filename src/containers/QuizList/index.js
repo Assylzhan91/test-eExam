@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import axiosQuiz from '../../axios/axios'
+
 import Spinner from '../../components/Spinner'
 import styles from "./quizList.module.sass"
 import {NavLink} from "react-router-dom"
@@ -12,7 +13,7 @@ class QuizList extends Component {
   }
   async componentDidMount() {
     try {
-      const response = await axios.get('https://test-quiz-2bf28.firebaseio.com/quizes.json')
+      const response = await axiosQuiz.get('https://test-quiz-2bf28.firebaseio.com/quizes.json')
       
       const quizList = []
       Object.keys(response.data).forEach((item, index)=>{
@@ -39,6 +40,7 @@ class QuizList extends Component {
         {
           this.state.isLoading
           ? <Spinner/>
+          
           : <ul>
               {
                 this.state.quizList.map(item=>{
