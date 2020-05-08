@@ -2,8 +2,12 @@ import axiosQuiz from "../../axios/axios";
 import {
   FETCHED_QUIZES_START,
   FETCHED_QUIZES_SUCCESS,
-  FETCHED_QUIZES_ERROR, 
-  FETCHED_QUIZ_SUCCESS
+  FETCHED_QUIZES_ERROR,
+  FETCHED_QUIZ_SUCCESS,
+  QUIZ_SET_STATE,
+  FINISHED_QUIZ,
+  SWITCH_NEXT_TO_QUIZ,
+  RETRY_QUIZ_HANDLER
 } from "./actionTypes";
 
 export function fetchedQuizes() {
@@ -44,8 +48,6 @@ export function fetchedQuizById(quizId) {
   }
 }
 
-
-
 export function fetchedQuizesStart(){
   return {
     type: FETCHED_QUIZES_START
@@ -72,3 +74,83 @@ export function fetchedQuizesError(error){
     error
   }
 }
+
+
+function quizSetState(answerState, results) {
+  return {
+    type: QUIZ_SET_STATE,
+    answerState,
+    results
+  }
+}
+
+function finishedQuiz() {
+  return{
+    type: FINISHED_QUIZ
+  }
+}
+function switchNextToQuiz(activeQuestion) {
+  return{
+    type: SWITCH_NEXT_TO_QUIZ,
+    activeQuestion,
+  }
+}
+
+
+export function onAnswerClickHandler(id) {
+  return (dispatch, getState) =>{
+    
+    let state = getState().reducerQuizList
+    
+    let question = state.quiz[state.activeQuestion]
+    let results = state.results
+    let success = 'success'
+    let error = 'error'
+    
+
+    if(state.answerState){
+      const key = Object.keys(state.answerState)[0]
+      if(state.answerState[key]=== success){
+        return
+      }
+    }
+
+    if(id === question.rightAnswersId ){
+      if(!results[question.id]){
+        results[question.id] = success
+      }
+      dispatch(quizSetState({[id]: success}, results))
+      
+      let timer = window.setTimeout(()=>{
+        if(isFinishedQuiz(state)){
+          dispatch(finishedQuiz())
+        }else{
+          
+          dispatch(switchNextToQuiz(state.activeQuestion))
+        
+        }
+        window.clearTimeout(timer)
+      }, 1000)
+    }
+
+    else{
+      results[question.id] = error
+      
+      dispatch(quizSetState({[id]: error}, results))
+    }
+  }
+}
+
+export function onRetryHandler(){
+  return {
+    type: RETRY_QUIZ_HANDLER
+  }
+}
+
+
+function isFinishedQuiz (state){
+  return state.activeQuestion + 1 === state.quiz.length
+}
+
+  
+

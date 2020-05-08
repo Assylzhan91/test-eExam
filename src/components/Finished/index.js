@@ -11,7 +11,6 @@ const Finished = ({quiz, results, onRetry}) => {
    
     if(results[key] === 'success'){
       total++
-   
     }
     return total
   }), 0)
@@ -42,7 +41,7 @@ const Finished = ({quiz, results, onRetry}) => {
         <Button onClick={onRetry} type="primary">Try again</Button>
         
         <Link to="/">
-          <Button onClick={onRetry} type="success">Go to ListQuiz</Button>  
+          <Button type="success">Go Back to ListQuiz</Button>  
         </Link>
         
       </div>
