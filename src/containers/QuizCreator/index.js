@@ -7,6 +7,7 @@ import Select from "../../components/UI/Select";
 import {connect} from "react-redux";
 
 import {createQuizHandler, finishCreateQuiz} from "../../store/actions/create";
+import {createReducer} from "../../store/reducers/create";
 
 
 function createOption(number){
@@ -47,7 +48,7 @@ class QuizCreator extends Component {
   addQuestionHandler = e =>{
     e.preventDefault()
     
-    const { question, option1, option2, option3, option4}= this.state.formControls
+    const { question, option1, option2, option3, option4} = this.state.formControls
     const quizItem = {
       question: question.value,
       id: this.props.quiz.length + 1,
@@ -75,7 +76,6 @@ class QuizCreator extends Component {
     e.preventDefault()
 
     this.setState({
-      quiz: [],
       rightAnswersId: 1,
       formControls: creatFormControl(),
       isFormValid: false
@@ -130,6 +130,7 @@ class QuizCreator extends Component {
   }
   
   render() {
+    console.log(this.props.quiz.length)
     const select = <Select
       label='Pick up the correct answer'
       value={this.state.rightAnswersId}
@@ -157,8 +158,7 @@ class QuizCreator extends Component {
           </Button>
           <Button type="success" 
                   onClick={this.createQuizHandler}
-                  // disabled={this.props.quiz.length === 0}
-                  disabled={false}
+                  disabled={this.props.quiz.length === 0}
           >
             Create a new test 
           </Button>
@@ -168,9 +168,9 @@ class QuizCreator extends Component {
   }
 }
 
-const mapStateToProps = ({})=>{
+const mapStateToProps = ({createReducer})=>{
   return {
-    quiz: []
+    quiz: createReducer.quiz
   }
 }
 

@@ -14,7 +14,7 @@ export const createReducer = (state = initialState, action)=>{
     case RESET_QUIZ_CREATION:
       return {
         ...state,
-        quiz: [] 
+        quiz: []
       }
     default:
       return state

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import axios from "axios"
-import styles from "./auth.module.sass"
-import Button from "../../components/UI/Button"
-import Input from "../../components/UI/Input"
+import styles from './auth.module.sass'
+import Button from '../../components/UI/Button'
+import Input from '../../components/UI/Input'
+import {connect} from 'react-redux'
+import {auth} from '../../store/actions/auth'
 
 function validateEmail(email) {
-  let pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+  let pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
   return pattern.test(String(email).toLowerCase())  
 }
 
@@ -81,10 +82,15 @@ class Auth extends Component {
     })
   }
   
-  onSignInHandler = async ()=>{
-    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='
-    
-    const authData = {
+  onSignInHandler  = () =>{
+   
+    this.props.auth(
+      this.state.formControls.email.value,
+      this.state.formControls.password.value,
+      false
+    )
+       
+   /* const authData = {
       email: this.state.formControls.email.value,
       password: this.state.formControls.password.value,
       returnSecureToken: true
@@ -96,24 +102,26 @@ class Auth extends Component {
     }catch (e) {
       console.log(e)
     }
-  
+  */
     
   }
 
-  onLoginHandler= async ()=>{
-    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
-    const authData = {
-      email: this.state.formControls.email.value,
-      password: this.state.formControls.password.value,
-      returnSecureToken: true
-    }
-
+  onLoginHandler = () =>{
+    
+    this.props.auth(
+      this.state.formControls.email.value,
+      this.state.formControls.password.value,
+      true
+      )
+    let url = 'https://identitytoolkitgoogleapis.com/v1/accounts:signInWithPassword?key='
+    
+    /*
     try {
       const response = await axios.post(url + 'AIzaSyAMRSQfJKJR_pfDttEoVeZl2YtPiJnw_0o', authData)
       console.log(response.data)
     }catch (e) {
       console.log(e)
-    }
+    }*/
 
   }
 
@@ -145,7 +153,7 @@ class Auth extends Component {
   
   render() {
 
-    //A new app for redux-react
+
     return (
       <div className={styles.auth}>
         <h1 className="title">Auth</h1>
@@ -157,7 +165,7 @@ class Auth extends Component {
           <Button
             onClick={this.onLoginHandler}           
             disabled={!this.state.isValidate}
-            type="success"
+            type='success'
           >
             Sign in
           </Button>
@@ -165,7 +173,7 @@ class Auth extends Component {
           <Button
             onClick={this.onSignInHandler}
             disabled={!this.state.isValidate}
-            type="primary"
+            type='primary'
           >
             Register
           </Button>
@@ -175,4 +183,14 @@ class Auth extends Component {
   }
 }
 
-export  default Auth
+
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    auth: (email,password, isLogin) => dispatch(auth(email,password, isLogin))
+  }
+}
+
+
+
+
+export  default connect(null, mapDispatchToProps)(Auth)
