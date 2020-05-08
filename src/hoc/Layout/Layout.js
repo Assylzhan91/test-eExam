@@ -3,6 +3,11 @@ import MenuToggle from '../../components/Navigation/MenuToggle'
 import Drawer from '../../components/Navigation/Drawer'
 import styles from './layout.module.scss'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { inOpenedAction } from '../../store/actions/actions'
+
+
+
 
 class Layout extends Component {
   state = {
@@ -16,6 +21,8 @@ class Layout extends Component {
   
 
   render() {
+    const {isOpened, onToggleMenuHandler} = this.props
+    
     let path = this.props.location.pathname.replace(/^\//g, '')
     let clsArr = [
       styles.main
@@ -26,12 +33,12 @@ class Layout extends Component {
     return (
       <div className={styles.layout}>
         <Drawer
-          onToggleMenuHandler={this.onToggleMenuHandler}
-          isOpened={this.state.isOpened}
+          onToggleMenuHandler={onToggleMenuHandler}
+          isOpened={isOpened}
         />
         <MenuToggle 
-          onToggle={this.onToggleMenuHandler}
-          isOpened={this.state.isOpened}          
+          onToggle={onToggleMenuHandler}
+          isOpened={isOpened}          
         />
         
         <main className={clsArr.join(' ')}>
@@ -43,4 +50,17 @@ class Layout extends Component {
     )
   }
 }
-export  default withRouter(Layout) 
+
+const mapStateToProps = ({reducerLayout})=>{
+    return {
+    isOpened: reducerLayout.isOpened
+  }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    onToggleMenuHandler: () =>dispatch(inOpenedAction())
+  }  
+}
+
+export  default connect(mapStateToProps, mapDispatchToProps)(withRouter(Layout)) 
