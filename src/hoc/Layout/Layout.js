@@ -59,7 +59,7 @@ const mapStateToProps = ({reducerLayout})=>{
 
 const mapDispatchToProps = (dispatch)=>{
   return {
-    onToggleMenuHandler: () =>dispatch(inOpenedAction())
+    onToggleMenuHandler: () => dispatch(inOpenedAction())
   }  
 }
 

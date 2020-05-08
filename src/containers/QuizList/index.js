@@ -1,49 +1,32 @@
 import React, { Component } from 'react'
 import axiosQuiz from '../../axios/axios'
-
 import Spinner from '../../components/Spinner'
 import styles from "./quizList.module.sass"
 import {NavLink} from "react-router-dom"
 
+import {connect} from "react-redux";
+import {fetchedQuizes} from "../../store/actions/actionQuizList";
+
+
 class QuizList extends Component {
   
-  state ={
-    quizList: [],
-    isLoading: true
-  }
-  async componentDidMount() {
-    try {
-      const response = await axiosQuiz.get('https://test-quiz-2bf28.firebaseio.com/quizes.json')
-      
-      const quizList = []
-      Object.keys(response.data).forEach((item, index)=>{
-        quizList.push({
-          id: item,
-          name: `Test №${index + 1}`
-        }) 
-      })
-      
-      this.setState({
-        quizList,
-        isLoading: false
-      })
-      
-    }catch (e) {
-      console.log(e)
-    }
+  componentDidMount() {
+    this.props.fetchedQuizes() 
+    
   }
 
   render() {
+ 
     return (
       <div className={styles.quizList}>
           <h1 className="title">QuizList</h1>
         {
-          this.state.isLoading
+          this.props.isLoading && this.props.quizList !== 0
           ? <Spinner/>
           
           : <ul>
               {
-                this.state.quizList.map(item=>{
+                this.props.quizList.map(item=>{
                   return (
                     <li key={item.id}>
                       <NavLink to={'/quiz/' + item.id}>
@@ -63,4 +46,21 @@ class QuizList extends Component {
   }
 }
 
-export  default QuizList
+
+
+const mapStateToProps = ({reducerQuizList})=>{
+  return {
+    quizList: reducerQuizList.quizList,
+    isLoading: reducerQuizList.isLoading,
+  }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    fetchedQuizes: () => dispatch(fetchedQuizes())
+  }
+}
+
+
+
+export  default connect(mapStateToProps, mapDispatchToProps)(QuizList)
