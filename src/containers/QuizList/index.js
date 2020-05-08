@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axiosQuiz from '../../axios/axios'
 import Spinner from '../../components/Spinner'
 import styles from "./quizList.module.sass"
 import {NavLink} from "react-router-dom"
@@ -60,6 +59,7 @@ const mapDispatchToProps = (dispatch)=>{
     fetchedQuizes: () => dispatch(fetchedQuizes())
   }
 }
+
 
 
 
