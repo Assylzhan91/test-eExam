@@ -100,7 +100,7 @@ function switchNextToQuiz(activeQuestion) {
 export function onAnswerClickHandler(id) {
   return (dispatch, getState) =>{
     
-    let state = getState().reducerQuizList
+    let state = getState().quizListReducer
     
     let question = state.quiz[state.activeQuestion]
     let results = state.results

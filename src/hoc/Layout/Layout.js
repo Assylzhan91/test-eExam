@@ -4,9 +4,7 @@ import Drawer from '../../components/Navigation/Drawer'
 import styles from './layout.module.scss'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { inOpenedAction } from '../../store/actions/actions'
-
-
+import { inOpenedAction } from '../../store/actions/layout'
 
 
 class Layout extends Component {
@@ -51,9 +49,10 @@ class Layout extends Component {
   }
 }
 
-const mapStateToProps = ({reducerLayout})=>{
+const mapStateToProps = ({layoutReducer})=>{
+ 
     return {
-    isOpened: reducerLayout.isOpened
+    isOpened: layoutReducer.isOpened
   }
 }
 

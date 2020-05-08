@@ -20,7 +20,7 @@ const initialState = {
   quiz: null
 }
 
-export const reducerQuizList = (state = initialState, action)=>{
+export const quizListReducer = (state = initialState, action)=>{
   switch (action.type) {
     case FETCHED_QUIZES_START:
       return {
@@ -46,7 +46,7 @@ export const reducerQuizList = (state = initialState, action)=>{
       }
     case QUIZ_SET_STATE:
       return {
-        /*answerState,  results*/
+
         ...state,
         answerState: action.answerState,
         results: action.results
@@ -63,13 +63,6 @@ export const reducerQuizList = (state = initialState, action)=>{
         answerState: null,
       }
     case RETRY_QUIZ_HANDLER:
-/*
-      this.setState({
-        isFinished: false,
-        activeQuestion: 0,
-        results: {},
-        answerState: null
-      })*/
 
       return {
         ...state,

@@ -1,8 +1,10 @@
 import {combineReducers} from "redux"
-import {reducerLayout} from "./storeLayout"
-import {reducerQuizList} from "./quizList"
+import {layoutReducer} from "./layout"
+import {quizListReducer} from "./quizList"
+import {createReducer} from "./create"
 
 export default combineReducers({
-  reducerLayout,
-  reducerQuizList
+  layoutReducer,
+  quizListReducer,
+  createReducer
 })

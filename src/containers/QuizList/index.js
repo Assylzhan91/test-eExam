@@ -4,7 +4,7 @@ import styles from "./quizList.module.sass"
 import {NavLink} from "react-router-dom"
 
 import {connect} from "react-redux";
-import {fetchedQuizes} from "../../store/actions/actionQuizList";
+import {fetchedQuizes} from "../../store/actions/quizList";
 
 
 class QuizList extends Component {
@@ -47,10 +47,10 @@ class QuizList extends Component {
 
 
 
-const mapStateToProps = ({reducerQuizList})=>{
+const mapStateToProps = ({quizListReducer})=>{
   return {
-    quizList: reducerQuizList.quizList,
-    isLoading: reducerQuizList.isLoading,
+    quizList: quizListReducer.quizList,
+    isLoading: quizListReducer.isLoading,
   }
 }
 

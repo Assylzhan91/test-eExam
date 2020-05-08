@@ -4,12 +4,13 @@ import ActiveQuiz from '../../components/ActiveQuiz'
 import Spinner from '../../components/Spinner'
 import Finished from '../../components/Finished'
 import styles from "./quiz.module.scss"
-import {connect} from "react-redux";
+import {connect} from "react-redux"
 import {
   fetchedQuizById, 
   onAnswerClickHandler, 
   onRetryHandler
-} from "../../store/actions/actionQuizList";
+} from "../../store/actions/quizList"
+
 
 class Quiz extends Component {
 
@@ -59,14 +60,14 @@ const mapDispatchToProps = (dispatch)=>{
   }
 }
 
-const mapStateToProps = ({reducerQuizList})=>{
+const mapStateToProps = ({quizListReducer})=>{
   return {
-    results       : reducerQuizList.results,
-    isFinished     :reducerQuizList.isFinished,
-    activeQuestion: reducerQuizList.activeQuestion,
-    answerState   : reducerQuizList.answerState,
-    quiz          : reducerQuizList.quiz,
-    isLoading     : reducerQuizList.isLoading
+    results       : quizListReducer.results,
+    isFinished    : quizListReducer.isFinished,
+    activeQuestion: quizListReducer.activeQuestion,
+    answerState   : quizListReducer.answerState,
+    quiz          : quizListReducer.quiz,
+    isLoading     : quizListReducer.isLoading
   }
 }
   

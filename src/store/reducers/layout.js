@@ -1,10 +1,12 @@
+import {IS_OPENED} from "../actions/actionTypes";
+
 const initialState = {
   isOpened: false
 }
 
-export const reducerLayout = (state = initialState, action)=>{
+export const layoutReducer = (state = initialState, action)=>{
   switch (action.type) {
-    case 'IS_OPENED':
+    case IS_OPENED:
       return {
         ...state,
         isOpened: !state.isOpened
