@@ -145,7 +145,7 @@ class Auth extends Component {
   
   render() {
 
-    
+    //A new app for redux-react
     return (
       <div className={styles.auth}>
         <h1 className="title">Auth</h1>
