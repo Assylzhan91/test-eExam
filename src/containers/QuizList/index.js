@@ -36,7 +36,7 @@ class QuizList extends Component {
   render() {
     return (
       <div className={styles.quizList}>
-          <h1>QuizList</h1>
+          <h1 className="title">QuizList</h1>
         {
           this.state.isLoading
           ? <Spinner/>

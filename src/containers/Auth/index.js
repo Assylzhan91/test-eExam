@@ -148,7 +148,7 @@ class Auth extends Component {
     
     return (
       <div className={styles.auth}>
-        <h1>Auth</h1>
+        <h1 className="title">Auth</h1>
         <form action='' className={styles.form} onSubmit={this.SubmitHandler}>
           {
             this.renderFormControls()

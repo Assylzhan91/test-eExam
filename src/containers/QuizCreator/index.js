@@ -146,7 +146,7 @@ class QuizCreator extends Component {
     />
     return (
       <div className={styles.quizCreator}>
-        <h1>Create a quiz</h1>
+        <h1 className="title">Create a quiz</h1>
         <form action="" onSubmit={this.SubmitHandler}>
           { this.renderFormControl()}
           
